@@ -1,5 +1,6 @@
 package org.library.tdo;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
@@ -7,12 +8,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class ReaderRole extends PanacheEntityBase {
+public class ReaderRole extends PanacheEntity {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
-    private int readerRoleID;
+    private int readerRoleID;*/
 
     @Column(name = "role_name", nullable = false)
     private String roleName;

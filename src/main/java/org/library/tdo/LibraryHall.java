@@ -1,5 +1,6 @@
 package org.library.tdo;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
@@ -9,11 +10,11 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class ReadingHall extends PanacheEntityBase {
-    @Id
+public class LibraryHall extends PanacheEntity {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "hall_id")
-    private UUID hallId;
+    private UUID hallId;*/
 
     @Column(name = "hall_name", nullable = false)
     private String hallName;
