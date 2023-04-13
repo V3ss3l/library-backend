@@ -5,6 +5,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -26,4 +28,8 @@ public class Adress extends PanacheEntity {
     private String room;
 
     private String floor;
+
+    public static Adress findByStreet(String street){
+        return find("street = ?1", street).firstResult();
+    }
 }
