@@ -1,9 +1,7 @@
-package org.library.resources;
+package org.library.resources.book_resources;
 
-import org.library.tdo.Adress;
-import org.library.tdo.HallType;
-import org.library.tdo.ReaderJob;
-import org.library.tdo.UniversityGroup;
+import org.library.tdo.book_tdo.Book;
+import org.library.tdo.hall_tdo.Housing;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -12,21 +10,22 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/universitygroup")
-@Produces(MediaType.APPLICATION_JSON)
+@Path("/book")
 @Consumes(MediaType.APPLICATION_JSON)
-public class GroupResource {
+@Produces(MediaType.APPLICATION_JSON)
+public class BookResource {
     @GET
     public Response getAll(){
-        List<HallType> list = HallType.listAll();
+        List<Book> list = Book.listAll();
         return Response.ok(list).build();
     }
+
 
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
-        return UniversityGroup.findByIdOptional(id)
-                .map(group -> Response.ok(group).build())
+        return Book.findByIdOptional(id)
+                .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
@@ -41,18 +40,18 @@ public class GroupResource {
 
     @POST
     @Transactional
-    public Response create(UniversityGroup group) {
-        UniversityGroup.persist(group);
-        if(group.isPersistent()){
-            return Response.created(URI.create("/universitygroup" + group.id)).build();
+    public Response create(Book result) {
+        result.persistAndFlush();
+        if(result.isPersistent()){
+            return Response.created(URI.create("/book" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
+
     @DELETE
     @Path("{id}")
-    @Transactional
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = UniversityGroup.deleteById(id);
+        boolean deleted = Book.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

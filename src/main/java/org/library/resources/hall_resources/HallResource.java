@@ -1,7 +1,6 @@
-package org.library.resources;
+package org.library.resources.hall_resources;
 
-import org.library.tdo.Faculty;
-import org.library.tdo.Housing;
+import org.library.tdo.hall_tdo.LibraryHall;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -10,13 +9,13 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/faculty")
+@Path("/libraryhall")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class FacultyResource {
+public class HallResource {
     @GET
     public Response getAll(){
-        List<Faculty> list = Faculty.listAll();
+        List<LibraryHall> list = LibraryHall.listAll();
         return Response.ok(list).build();
     }
 
@@ -24,7 +23,7 @@ public class FacultyResource {
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
-        return Faculty.findByIdOptional(id)
+        return LibraryHall.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -40,10 +39,10 @@ public class FacultyResource {
 
     @POST
     @Transactional
-    public Response create(Faculty result) {
-        Faculty.persist(result);
+    public Response create(LibraryHall result) {
+        LibraryHall.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/faculty" + result.id)).build();
+            return Response.created(URI.create("/libraryhall" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -51,7 +50,7 @@ public class FacultyResource {
     @DELETE
     @Path("{id}")
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = Faculty.deleteById(id);
+        boolean deleted = LibraryHall.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

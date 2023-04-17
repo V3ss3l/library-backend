@@ -1,10 +1,11 @@
-package org.library.tdo;
+package org.library.tdo.hall_tdo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
+import org.library.tdo.Adress;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package org.library.tdo;
+package org.library.tdo.user_tdo;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;

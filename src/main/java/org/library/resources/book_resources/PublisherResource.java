@@ -1,7 +1,8 @@
-package org.library.resources;
+package org.library.resources.book_resources;
 
-import org.library.tdo.Housing;
-import org.library.tdo.ReaderRole;
+import org.library.tdo.book_tdo.Book;
+import org.library.tdo.book_tdo.Publisher;
+import org.library.tdo.hall_tdo.Housing;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -10,13 +11,13 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/readerrole")
+@Path("/publisher")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class RoleResource {
+public class PublisherResource {
     @GET
     public Response getAll(){
-        List<ReaderRole> list = ReaderRole.listAll();
+        List<Publisher> list = Publisher.listAll();
         return Response.ok(list).build();
     }
 
@@ -24,7 +25,7 @@ public class RoleResource {
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
-        return ReaderRole.findByIdOptional(id)
+        return Publisher.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -40,10 +41,10 @@ public class RoleResource {
 
     @POST
     @Transactional
-    public Response create(ReaderRole result) {
-        ReaderRole.persist(result);
+    public Response create(Publisher result) {
+        result.persistAndFlush();
         if(result.isPersistent()){
-            return Response.created(URI.create("/readerrole" + result.id)).build();
+            return Response.created(URI.create("/publisher" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -51,7 +52,7 @@ public class RoleResource {
     @DELETE
     @Path("{id}")
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = ReaderRole.deleteById(id);
+        boolean deleted = Publisher.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

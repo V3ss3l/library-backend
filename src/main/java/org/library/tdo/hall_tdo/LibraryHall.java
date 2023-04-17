@@ -1,11 +1,9 @@
-package org.library.tdo;
+package org.library.tdo.hall_tdo;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 
 @Data
