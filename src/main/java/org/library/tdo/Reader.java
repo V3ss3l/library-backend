@@ -34,7 +34,7 @@ public class Reader extends PanacheEntityBase {
 
     @Column(name = "registration_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private java.util.Date registrationDate;
+    private Date registrationDate;
 
     @Column(nullable = false)
     private String email;

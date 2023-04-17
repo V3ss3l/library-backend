@@ -5,7 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -16,7 +16,8 @@ public class Formuliar extends PanacheEntityBase {
     @Column(name = "formuliar_id")
     private UUID formuliarID;
 
-    @Column(name="date_of_creation", nullable = false)
+    @Column(name="date_of_creation")
+    @Temporal(TemporalType.DATE)
     private Date dateOfCreation;
 
     @Column(name = "count_overdue_books", nullable = false)

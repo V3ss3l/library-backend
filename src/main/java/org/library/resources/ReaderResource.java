@@ -1,30 +1,35 @@
 package org.library.resources;
 
-import org.library.tdo.ReaderJob;
+import org.library.tdo.Formuliar;
+import org.library.tdo.Reader;
+
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-
-@Path("/readerjob")
-@Produces(MediaType.APPLICATION_JSON)
+@Path("/reader")
 @Consumes(MediaType.APPLICATION_JSON)
-public class JobResource{
-
+@Produces(MediaType.APPLICATION_JSON)
+public class ReaderResource {
     @GET
     public Response getAll(){
-        List<ReaderJob> list = ReaderJob.listAll();
+        List<Reader> list = Reader.listAll();
         return Response.ok(list).build();
     }
 
 
     @GET
     @Path("{id}")
-    public Response getById(@PathParam("id") Long id){
-        return ReaderJob.findByIdOptional(id)
+    public Response getById(@PathParam("id") UUID id){
+        return Reader.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -40,21 +45,21 @@ public class JobResource{
 
     @POST
     @Transactional
-    public Response create(ReaderJob result) {
-        ReaderJob.persist(result);
+    public Response create(Reader result) {
+        result.setRegistrationDate(new Date(LocalDate.now().toEpochSecond(LocalTime.now(), (ZoneOffset) ZoneOffset.systemDefault())));
+        Formuliar.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/readerjob" + result.id)).build();
+            return Response.created(URI.create("/reader" + result.getReaderID())).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 
     @DELETE
     @Path("{id}")
-    public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = ReaderJob.deleteById(id);
+    public Response deleteById(@PathParam("id") UUID id){
+        boolean deleted = Formuliar.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
 }

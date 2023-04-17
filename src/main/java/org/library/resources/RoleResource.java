@@ -1,6 +1,8 @@
 package org.library.resources;
 
-import org.library.tdo.ReaderJob;
+import org.library.tdo.Housing;
+import org.library.tdo.ReaderRole;
+
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -8,15 +10,13 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-
-@Path("/readerjob")
-@Produces(MediaType.APPLICATION_JSON)
+@Path("/readerrole")
 @Consumes(MediaType.APPLICATION_JSON)
-public class JobResource{
-
+@Produces(MediaType.APPLICATION_JSON)
+public class RoleResource {
     @GET
     public Response getAll(){
-        List<ReaderJob> list = ReaderJob.listAll();
+        List<ReaderRole> list = ReaderRole.listAll();
         return Response.ok(list).build();
     }
 
@@ -24,7 +24,7 @@ public class JobResource{
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
-        return ReaderJob.findByIdOptional(id)
+        return ReaderRole.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -40,10 +40,10 @@ public class JobResource{
 
     @POST
     @Transactional
-    public Response create(ReaderJob result) {
-        ReaderJob.persist(result);
+    public Response create(ReaderRole result) {
+        ReaderRole.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/readerjob" + result.id)).build();
+            return Response.created(URI.create("/readerrole" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -51,10 +51,9 @@ public class JobResource{
     @DELETE
     @Path("{id}")
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = ReaderJob.deleteById(id);
+        boolean deleted = ReaderRole.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
 }

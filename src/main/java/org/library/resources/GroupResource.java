@@ -1,6 +1,8 @@
 package org.library.resources;
 
 import org.library.tdo.Adress;
+import org.library.tdo.HallType;
+import org.library.tdo.ReaderJob;
 import org.library.tdo.UniversityGroup;
 
 import javax.transaction.Transactional;
@@ -16,8 +18,8 @@ import java.util.List;
 public class GroupResource {
     @GET
     public Response getAll(){
-        List<UniversityGroup> groupList = UniversityGroup.listAll();
-        return Response.ok(groupList).build();
+        List<HallType> list = HallType.listAll();
+        return Response.ok(list).build();
     }
 
     @GET
@@ -40,9 +42,9 @@ public class GroupResource {
     @POST
     @Transactional
     public Response create(UniversityGroup group) {
-        Adress.persist(group);
-        if(adress.isPersistent()){
-            return Response.created(URI.create("/adress" + adress.id)).build();
+        UniversityGroup.persist(group);
+        if(group.isPersistent()){
+            return Response.created(URI.create("/universitygroup" + group.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -50,7 +52,7 @@ public class GroupResource {
     @Path("{id}")
     @Transactional
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = Adress.deleteById(id);
+        boolean deleted = UniversityGroup.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

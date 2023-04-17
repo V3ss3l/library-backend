@@ -1,7 +1,7 @@
 package org.library.resources;
 
+
 import org.library.tdo.Adress;
-import org.library.tdo.ReaderJob;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -16,31 +16,31 @@ import java.util.List;
 public class AdressResource {
     @GET
     public Response getAll(){
-        List<Adress> adressList = Adress.listAll();
-        return Response.ok(adressList).build();
+        List<Adress> list = Adress.listAll();
+        return Response.ok(list).build();
     }
 
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
         return Adress.findByIdOptional(id)
-                .map(job -> Response.ok(job).build())
+                .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    @GET
+    /*@GET
     @Path("{street}")
     public Response searchByStreet(String street){
         Adress buff = Adress.findByStreet(street);
         if(buff == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         } else return Response.ok(buff).build();
-    }
+    }*/
 
     @POST
     @Transactional
     public Response create(Adress adress) {
-        Adress.persist(adress);
+        adress.persistAndFlush();
         if(adress.isPersistent()){
             return Response.created(URI.create("/adress" + adress.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
