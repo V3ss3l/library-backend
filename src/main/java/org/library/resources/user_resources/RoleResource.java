@@ -49,6 +49,7 @@ public class RoleResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = ReaderRole.deleteById(id);
         if(deleted) {

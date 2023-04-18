@@ -51,6 +51,7 @@ public class PublisherResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Publisher.deleteById(id);
         if(deleted) {

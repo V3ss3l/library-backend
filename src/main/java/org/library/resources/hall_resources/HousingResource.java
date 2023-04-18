@@ -49,6 +49,7 @@ public class HousingResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Housing.deleteById(id);
         if(deleted) {

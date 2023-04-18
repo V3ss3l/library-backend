@@ -28,7 +28,7 @@ public class ReaderResource {
 
     @GET
     @Path("{id}")
-    public Response getById(@PathParam("id") UUID id){
+    public Response getById(@PathParam("id") Long id){
         return Reader.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
@@ -49,14 +49,15 @@ public class ReaderResource {
         result.setRegistrationDate(new Date(LocalDate.now().toEpochSecond(LocalTime.now(), (ZoneOffset) ZoneOffset.systemDefault())));
         Formuliar.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/reader" + result.getReaderID())).build();
+            return Response.created(URI.create("/reader" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 
     @DELETE
     @Path("{id}")
-    public Response deleteById(@PathParam("id") UUID id){
+    @Transactional
+    public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Formuliar.deleteById(id);
         if(deleted) {
             return Response.noContent().build();

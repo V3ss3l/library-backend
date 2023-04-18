@@ -51,6 +51,7 @@ public class PackageResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Package.deleteById(id);
         if(deleted) {

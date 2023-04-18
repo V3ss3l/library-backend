@@ -12,9 +12,9 @@ public class Book extends PanacheEntity {
 
     private String bookName;
     private String author;
-    private UUID ISBN;
-    private UUID BBK;
-    private UUID UDK;
+    private String ISBN;
+    private String BBK;
+    private String UDK;
     private int pagesCount;
     private int yearOfPublishing;
     @ManyToOne(fetch = FetchType.LAZY)

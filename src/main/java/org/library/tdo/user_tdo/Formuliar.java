@@ -1,5 +1,6 @@
 package org.library.tdo.user_tdo;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
@@ -10,11 +11,11 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Formuliar extends PanacheEntityBase {
-    @Id
+public class Formuliar extends PanacheEntity {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "formuliar_id")
-    private UUID formuliarID;
+    private UUID formuliarID;*/
 
     @Column(name="date_of_creation")
     @Temporal(TemporalType.DATE)

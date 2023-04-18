@@ -50,6 +50,7 @@ public class BookResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Book.deleteById(id);
         if(deleted) {

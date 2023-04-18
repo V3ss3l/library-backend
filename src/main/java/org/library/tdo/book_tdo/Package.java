@@ -3,10 +3,7 @@ package org.library.tdo.book_tdo;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,6 +12,6 @@ public class Package extends PanacheEntity {
     private int countOfBooks;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Book book;
 }

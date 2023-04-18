@@ -49,6 +49,7 @@ public class HallResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = LibraryHall.deleteById(id);
         if(deleted) {

@@ -23,7 +23,7 @@ public class FormuliarResource {
 
     @GET
     @Path("{id}")
-    public Response getById(@PathParam("id") UUID id){
+    public Response getById(@PathParam("id") Long id){
         return Formuliar.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
@@ -43,14 +43,15 @@ public class FormuliarResource {
     public Response create(Formuliar result) {
         Formuliar.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/formuliar" + result.getFormuliarID())).build();
+            return Response.created(URI.create("/formuliar" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 
     @DELETE
     @Path("{id}")
-    public Response deleteById(@PathParam("id") UUID id){
+    @Transactional
+    public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Formuliar.deleteById(id);
         if(deleted) {
             return Response.noContent().build();

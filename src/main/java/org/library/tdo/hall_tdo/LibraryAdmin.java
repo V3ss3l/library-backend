@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class LibraryAdmin extends PanacheEntityBase {
-    @Id
+public class LibraryAdmin extends PanacheEntity {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "admin_id")
-    private UUID adminID;
+    private UUID adminID;*/
 
     @Column(nullable = false, name = "last_name")
     private String lastName;

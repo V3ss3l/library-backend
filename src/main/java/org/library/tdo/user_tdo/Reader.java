@@ -1,5 +1,6 @@
 package org.library.tdo.user_tdo;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import org.library.tdo.Adress;
@@ -10,14 +11,14 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Reader extends PanacheEntityBase {
-    @Id
+public class Reader extends PanacheEntity {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reader_id")
-    private UUID readerID;
+    private UUID readerID;*/
 
-    @Column(name = "outer_id")
-    private UUID outerID;
+    /*@Column(name = "outer_id")
+    private UUID outerID;*/
 
     @Column(nullable = false, name = "last_name")
     private String lastName;

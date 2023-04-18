@@ -50,6 +50,7 @@ public class StorageResource {
 
     @DELETE
     @Path("{id}")
+    @Transactional
     public Response deleteById(@PathParam("id") Long id){
         boolean deleted = Storage.deleteById(id);
         if(deleted) {
