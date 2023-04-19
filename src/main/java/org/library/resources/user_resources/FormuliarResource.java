@@ -30,6 +30,15 @@ public class FormuliarResource {
     }
 
     /*@GET
+    @Path("{id}")
+    public Response getReaderById(@PathParam("id") Long id){
+        Formuliar buff = Formuliar.findById(id);
+        if(buff.getReader() == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+        else return Response.ok(buff.getReader()).build();
+    }*/
+
+    /*@GET
     @Path("{group_name}")
     public Response searchByName(String name){
         Adress buff = Adress.findByStreet(name);

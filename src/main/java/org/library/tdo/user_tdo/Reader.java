@@ -6,6 +6,8 @@ import lombok.Data;
 import org.library.tdo.Adress;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
@@ -33,9 +35,11 @@ public class Reader extends PanacheEntity {
     @JoinColumn(name = "adress_id", nullable = false)
     private Adress adress;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column(name = "registration_date")
     @Temporal(TemporalType.DATE)
-    private Date registrationDate;
+    private Date registrationDate = Date.from(LocalDate.now().atStartOfDay()
+            .atZone(ZoneId.systemDefault())
+            .toInstant());
 
     @Column(nullable = false)
     private String email;
@@ -43,7 +47,6 @@ public class Reader extends PanacheEntity {
     @Column(nullable = false)
     private String cellular;
 
-    @Column(nullable = false)
     private int course;
 
     @ManyToOne
@@ -61,4 +64,7 @@ public class Reader extends PanacheEntity {
     @ManyToOne()
     @JoinColumn(name = "role_id", nullable = false)
     private ReaderRole role;
+
+    @OneToOne(mappedBy = "reader")
+    private Formuliar formuliar;
 }

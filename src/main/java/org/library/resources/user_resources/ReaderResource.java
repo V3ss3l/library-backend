@@ -33,7 +33,6 @@ public class ReaderResource {
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
-
     /*@GET
     @Path("{group_name}")
     public Response searchByName(String name){
