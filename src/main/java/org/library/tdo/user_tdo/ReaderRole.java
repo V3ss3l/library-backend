@@ -18,7 +18,7 @@ public class ReaderRole extends PanacheEntity {
     private String roleName;
 
     @ManyToOne
-    @JoinColumn(name = "job_id", nullable = false)
+    @JoinColumn(name = "job_id")
     private ReaderJob readerJob;
 
     @ManyToOne

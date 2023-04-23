@@ -32,7 +32,7 @@ public class Reader extends PanacheEntity {
     private String surName;
 
     @ManyToOne()
-    @JoinColumn(name = "adress_id", nullable = false)
+    @JoinColumn(name = "adress_id")
     private Adress adress;
 
     @Column(name = "registration_date")
@@ -46,6 +46,9 @@ public class Reader extends PanacheEntity {
 
     @Column(nullable = false)
     private String cellular;
+
+    @Column(nullable = false)
+    private String password;
 
     private int course;
 

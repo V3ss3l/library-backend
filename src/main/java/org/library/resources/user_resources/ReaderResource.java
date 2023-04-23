@@ -45,7 +45,6 @@ public class ReaderResource {
     @POST
     @Transactional
     public Response create(Reader result) {
-        result.setRegistrationDate(new Date(LocalDate.now().toEpochSecond(LocalTime.now(), (ZoneOffset) ZoneOffset.systemDefault())));
         Formuliar.persist(result);
         if(result.isPersistent()){
             return Response.created(URI.create("/reader" + result.id)).build();
