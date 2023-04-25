@@ -40,7 +40,7 @@ public class RoleResource {
     @POST
     @Transactional
     public Response create(ReaderRole result) {
-        ReaderRole.persist(result);
+        result.persistAndFlush();
         if(result.isPersistent()){
             return Response.created(URI.create("/readerrole" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

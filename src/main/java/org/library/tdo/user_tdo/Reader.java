@@ -67,7 +67,4 @@ public class Reader extends PanacheEntity {
     @ManyToOne()
     @JoinColumn(name = "role_id", nullable = false)
     private ReaderRole role;
-
-    @OneToOne(mappedBy = "reader")
-    private Formuliar formuliar;
 }

@@ -50,7 +50,7 @@ public class FormuliarResource {
     @POST
     @Transactional
     public Response create(Formuliar result) {
-        Formuliar.persist(result);
+        result.persistAndFlush();
         if(result.isPersistent()){
             return Response.created(URI.create("/formuliar" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

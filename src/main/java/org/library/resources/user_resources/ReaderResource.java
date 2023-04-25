@@ -45,9 +45,9 @@ public class ReaderResource {
     @POST
     @Transactional
     public Response create(Reader result) {
-        Formuliar.persist(result);
+        result.persistAndFlush();
         if(result.isPersistent()){
-            return Response.created(URI.create("/reader" + result.id)).build();
+            return Response.created(URI.create("/reader" + result.id)).entity(result).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -56,7 +56,7 @@ public class ReaderResource {
     @Path("{id}")
     @Transactional
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = Formuliar.deleteById(id);
+        boolean deleted = Reader.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

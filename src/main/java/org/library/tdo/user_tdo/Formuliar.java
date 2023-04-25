@@ -30,7 +30,7 @@ public class Formuliar extends PanacheEntity {
     @ColumnDefault("0")
     private int countOverdueBooks;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn (name = "reader_id")
     private Reader reader;
 }
