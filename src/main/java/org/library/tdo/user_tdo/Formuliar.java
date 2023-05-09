@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -33,4 +34,9 @@ public class Formuliar extends PanacheEntity {
     @OneToOne()
     @JoinColumn (name = "reader_id")
     private Reader reader;
+
+    public static Formuliar findReaderByLoginInfo(String email, String password){
+        return Formuliar.find("reader.email = ?1 AND reader.password = ?2",
+                email, password).firstResult();
+    }
 }

@@ -41,13 +41,13 @@ public class Reader extends PanacheEntity {
             .atZone(ZoneId.systemDefault())
             .toInstant());
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String cellular;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String password;
 
     private int course;

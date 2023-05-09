@@ -22,6 +22,7 @@ public class Book extends PanacheEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Publisher publisher;
     private String language;
+    @Lob
     private String annotation;
     private String additionalInfo;
 
