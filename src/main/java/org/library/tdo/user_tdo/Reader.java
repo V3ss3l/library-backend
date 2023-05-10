@@ -13,11 +13,13 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Reader extends PanacheEntity {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "reader_id")
-    private UUID readerID;*/
+public class Reader extends PanacheEntityBase {
+    @Id
+    @SequenceGenerator(name = "reader_seq",
+            sequenceName = "common_sequence",
+            initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reader_seq")
+    private Long id;
 
     /*@Column(name = "outer_id")
     private UUID outerID;*/

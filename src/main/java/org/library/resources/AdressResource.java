@@ -28,15 +28,6 @@ public class AdressResource {
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    @GET
-    @Path("{street}")
-    public Response searchByStreet(String street){
-        Adress buff = Adress.findByStreet(street);
-        if(buff == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else return Response.ok(buff).build();
-    }
-
     @POST
     @Transactional
     public Response create(Adress adress) {

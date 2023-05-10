@@ -1,6 +1,7 @@
 package org.library.tdo.hall_tdo;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,11 +9,13 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class LibraryHall extends PanacheEntity {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "hall_id")
-    private UUID hallId;*/
+public class LibraryHall extends PanacheEntityBase {
+    @Id
+    @SequenceGenerator(name = "hall_seq",
+            sequenceName = "hall_sequence",
+            initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hall_seq")
+    private Long id;
 
     @Column(name = "hall_name", nullable = false)
     private String hallName;

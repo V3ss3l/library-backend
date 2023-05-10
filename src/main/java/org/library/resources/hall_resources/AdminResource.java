@@ -1,6 +1,7 @@
 package org.library.resources.hall_resources;
 
 import org.library.tdo.hall_tdo.LibraryAdmin;
+import org.library.tdo.LoginInfo;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -8,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
+
 @Path("/libraryadmin")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,10 +43,17 @@ public class AdminResource {
     public Response create(LibraryAdmin result) {
         LibraryAdmin.persist(result);
         if(result.isPersistent()){
-            return Response.created(URI.create("/libraryadmin" + result.id)).build();
+            return Response.created(URI.create("/libraryadmin" + result.getId())).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
+    @POST
+    @Path("login")
+    public Response login(LoginInfo info){
+        var result = LibraryAdmin.findAdminByLoginInfo(info.getEmail(), info.getPassword());
+        if(result == null) return Response.status(Response.Status.NOT_FOUND).build();
+        else return Response.ok(result).build();
+    }
 
     @DELETE
     @Path("{id}")

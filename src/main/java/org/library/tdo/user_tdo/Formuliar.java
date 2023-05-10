@@ -15,11 +15,13 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Formuliar extends PanacheEntity {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "formuliar_id")
-    private UUID formuliarID;*/
+public class Formuliar extends PanacheEntityBase {
+    @Id
+    @SequenceGenerator(name = "formuliar_seq",
+            sequenceName = "common_sequence",
+            initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "formuliar_seq")
+    private Long id;
 
     @Column(name="date_of_creation")
     @Temporal(TemporalType.DATE)

@@ -47,7 +47,7 @@ public class ReaderResource {
     public Response create(Reader result) {
         result.persistAndFlush();
         if(result.isPersistent()){
-            return Response.created(URI.create("/reader" + result.id)).entity(result).build();
+            return Response.created(URI.create("/reader" + result.getId())).entity(result).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 

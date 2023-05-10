@@ -1,4 +1,4 @@
-package org.library.tdo.user_tdo;
+package org.library.tdo;
 
 import lombok.Data;
 

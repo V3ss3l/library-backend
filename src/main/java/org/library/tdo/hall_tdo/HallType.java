@@ -10,11 +10,13 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class HallType extends PanacheEntity {
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "hall_type_id")
-    private int hallTypeID;*/
+public class HallType extends PanacheEntityBase {
+    @Id
+    @SequenceGenerator(name = "hall_type_seq",
+            sequenceName = "hall_type_sequence",
+            initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hall_type_seq")
+    private Long id;
 
     @Column(name = "type_name", nullable = false)
     private String typeName;

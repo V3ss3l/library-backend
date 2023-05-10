@@ -29,21 +29,12 @@ public class StorageResource {
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    /*@GET
-    @Path("{group_name}")
-    public Response searchByName(String name){
-        Adress buff = Adress.findByStreet(name);
-        if(buff == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else return Response.ok(buff).build();
-    }*/
-
     @POST
     @Transactional
     public Response create(Storage result) {
         result.persistAndFlush();
         if(result.isPersistent()){
-            return Response.created(URI.create("/storage" + result.id)).build();
+            return Response.created(URI.create("/storage" + result.getId())).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 

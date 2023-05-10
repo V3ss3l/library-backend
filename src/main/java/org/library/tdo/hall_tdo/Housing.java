@@ -11,12 +11,14 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Housing extends PanacheEntity {
+public class Housing extends PanacheEntityBase {
 
-   /* @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "housing_id")
-    private int housingID;*/
+    @Id
+    @SequenceGenerator(name = "housing_seq",
+            sequenceName = "housing_sequence",
+            initialValue = 1, allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "housing_seq")
+    private Long id;
 
     @Column(name = "housing_name", nullable = false)
     private String housingName;
