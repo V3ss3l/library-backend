@@ -1,8 +1,8 @@
 package org.library.resources.book_resources;
 
 import org.library.tdo.book_tdo.Book;
-import org.library.tdo.book_tdo.Storages;
-import org.library.tdo.hall_tdo.Housing;
+import org.library.tdo.book_tdo.BookDelivery;
+import org.library.tdo.book_tdo.Package;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -11,13 +11,13 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/book")
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/bookdelivery")
 @Produces(MediaType.APPLICATION_JSON)
-public class BookResource {
+@Consumes(MediaType.APPLICATION_JSON)
+public class BookDeliveryResource {
     @GET
     public Response getAll(){
-        List<Book> list = Book.listAll();
+        List<BookDelivery> list = BookDelivery.listAll();
         return Response.ok(list).build();
     }
 
@@ -25,25 +25,17 @@ public class BookResource {
     @GET
     @Path("{id}")
     public Response getById(@PathParam("id") Long id){
-        return Book.findByIdOptional(id)
+        return BookDelivery.findByIdOptional(id)
                 .map(result -> Response.ok(result).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    @GET
-    @Path("{id}/storages")
-    public Response getStoragesByBook(@PathParam("id") Long id){
-        List<Storages> list = Storages.getStoragesByBook(id);
-        if(list.isEmpty()) return Response.status(Response.Status.NOT_FOUND).build();
-        else return Response.ok(list).build();
-    }
-
     @POST
     @Transactional
-    public Response create(Book result) {
+    public Response create(BookDelivery result) {
         result.persistAndFlush();
         if(result.isPersistent()){
-            return Response.created(URI.create("/book" + result.getId())).build();
+            return Response.created(URI.create("/bookdelivery" + result.id)).build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -52,7 +44,7 @@ public class BookResource {
     @Path("{id}")
     @Transactional
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = Book.deleteById(id);
+        boolean deleted = BookDelivery.deleteById(id);
         if(deleted) {
             return Response.noContent().build();
         } else return Response.status(Response.Status.BAD_REQUEST).build();

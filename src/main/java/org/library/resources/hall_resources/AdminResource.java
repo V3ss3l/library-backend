@@ -1,5 +1,6 @@
 package org.library.resources.hall_resources;
 
+import org.library.tdo.book_tdo.Storages;
 import org.library.tdo.hall_tdo.LibraryAdmin;
 import org.library.tdo.LoginInfo;
 
@@ -29,14 +30,13 @@ public class AdminResource {
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    /*@GET
-    @Path("{group_name}")
-    public Response searchByName(String name){
-        Adress buff = Adress.findByStreet(name);
-        if(buff == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else return Response.ok(buff).build();
-    }*/
+    @GET
+    @Path("{id}/storages")
+    public Response getStoragesByAdminID(@PathParam("id") Long id){
+        List<Storages> list = Storages.getStoragesByAdminID(id);
+        if(list.isEmpty()) return Response.status(Response.Status.NOT_FOUND).build();
+        else return Response.ok(list).build();
+    }
 
     @POST
     @Transactional

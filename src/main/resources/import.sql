@@ -126,18 +126,18 @@ insert into package (id, count_of_books, book_id) values (9, 60, 8);
 insert into package (id, count_of_books, book_id) values (8, 30, 9);
 insert into package (id, count_of_books, book_id) values (10, 30, 10);
 
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
-values (1, 5, 1, 1, 3, 1);
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
+values (1, 5, 1, 1, 1, 3);
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
 values (2, 2, 1, 1, 1, 1);
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
-values (3, 1, 4, 4, 1, 3);
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
+values (3, 1, 4, 4, 3, 1);
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
 values (4, 2, 5, 5, 3, 3);
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
-values (5, 2, 6, 6, 1, 4);
-insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
-values (6, 2, 7, 7, 3, 4);
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
+values (5, 2, 6, 6, 4, 1);
+insert into storages (id, book_count, book_id, bookpackage_id, bookstorage_id, hall_id)
+values (6, 2, 7, 7, 4, 3);
 /*insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
 values (7, 3, , , 3, 1);
 insert into storages (id, book_count, book_id, bookpackage_id, hall_id, storage_id)
