@@ -7,6 +7,7 @@ import org.library.tdo.user_tdo.Formuliar;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +28,16 @@ public class BookDelivery extends PanacheEntity {
 
     @Column(name = "expire_date")
     @Temporal(TemporalType.DATE)
-    private Date dateOfExpire = new Date(dateOfGet.getTime() + 0x337f9800);
+    private Date dateOfExpire;
 
     public static List<BookDelivery> getListOfOrders(Long formuliarId){
         return find("formuliar.id = ?1", formuliarId).list();
+    }
+
+    public void addDaysToDate(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(getDateOfGet());
+        c.add(Calendar.DAY_OF_MONTH, 7);
+        setDateOfExpire(c.getTime());
     }
 }

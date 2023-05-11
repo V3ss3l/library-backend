@@ -9,6 +9,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Path("/bookdelivery")
@@ -33,6 +36,7 @@ public class BookDeliveryResource {
     @POST
     @Transactional
     public Response create(BookDelivery result) {
+        result.addDaysToDate();
         result.persistAndFlush();
         if(result.isPersistent()){
             return Response.created(URI.create("/bookdelivery" + result.id)).build();
